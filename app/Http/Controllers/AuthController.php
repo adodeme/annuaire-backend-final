@@ -59,7 +59,9 @@ class AuthController extends Controller
 
     public function me(Request $request)
     {
-        return $request->user()->load('profile');
+        return response()->json([
+            'message' => 'me fonctionne'
+        ]);
     }
 
     public function logout(Request $request)
