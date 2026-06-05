@@ -57,14 +57,17 @@ class AuthController extends Controller
         ]);
     }
 
-   public function me(Request $request)
+    public function me(Request $request)
     {
-        if (!$request->user()) {
-            return response()->json([
-                'message' => 'Utilisateur non authentifié'
-            ], 401);
-        }
-
         return $request->user()->load('profile');
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
+
+        return response()->json([
+            'message' => 'Déconnexion réussie'
+        ]);
     }
 }
